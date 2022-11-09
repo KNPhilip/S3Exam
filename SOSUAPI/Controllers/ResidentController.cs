@@ -16,7 +16,7 @@ namespace Rest_API.Controllers
         }
 
         [HttpGet]
-        [Route("Orders")]
+        [Route("GetResidents")]
         public async Task<ActionResult<List<Resident>>> Get()
         {
             try
@@ -26,7 +26,7 @@ namespace Rest_API.Controllers
             }
             catch
             {
-                string returning = "Der skete en fejl, ordrene kunne ikke hentes, prøv igen";
+                string returning = "Der skete en fejl, beboeren kunne ikke hentes, prøv igen";
                 return BadRequest(returning);
             }
         }

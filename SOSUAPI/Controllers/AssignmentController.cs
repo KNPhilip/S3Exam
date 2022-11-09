@@ -16,7 +16,7 @@ namespace Rest_API.Controllers
         }
 
         [HttpGet]
-        [Route("Assignment")]
+        [Route("GetAssignments")]
         public async Task<ActionResult<List<Assignment>>> Get()
         {
             try
@@ -26,14 +26,14 @@ namespace Rest_API.Controllers
             }
             catch
             {
-                string returning = "Der skete en fejl, ordrene kunne ikke hentes, prøv igen";
+                string returning = "Der skete en fejl, opgaverne kunne ikke hentes, prøv igen";
                 return BadRequest(returning);
             }
         }
 
         [HttpPost]
-        [Route("Assignment")]
-        public async Task<ActionResult<Assignment>> SaveNewCustomer(int assignmentId, string notes, DateTime startDate, DateTime expectedEndDate, DateTime actualEndDate, bool solved, Employee solvedBy, Resident resident)
+        [Route("CreateAssignment")]
+        public async Task<ActionResult<Assignment>> SaveNewAssignment(int assignmentId, string notes, DateTime startDate, DateTime expectedEndDate, DateTime actualEndDate, bool solved, Employee solvedBy, Resident resident)
         {
             Assignment a = new()
             {
@@ -50,7 +50,7 @@ namespace Rest_API.Controllers
             {
                 unitOfWork.AssignmentRepository.Insert(a);
                 await unitOfWork.SaveAsync();
-                string returning = "Kunden blev gemt";
+                string returning = "Opgaven blev gemt";
                 return Ok(returning);
             }
             catch (Exception e)
@@ -60,14 +60,14 @@ namespace Rest_API.Controllers
         }
 
         [HttpPut]
-        [Route("Assignment")]
-        public async Task<ActionResult<Assignment>> UpdateCustomer(Assignment request)
+        [Route("UpdateAssignment")]
+        public async Task<ActionResult<Assignment>> UpdateAssignment(Assignment request)
         {
             List<Assignment> assignments = (List<Assignment>)await unitOfWork.AssignmentRepository.GetAllAsync();
             var assignment = assignments.Find(s => s.Id == request.Id);
             if (assignment == null)
             {
-                string returning = "Kunde ikke fundet";
+                string returning = "Opgave ikke fundet";
                 return BadRequest(returning);
             }
             else
@@ -79,7 +79,7 @@ namespace Rest_API.Controllers
                 {
                     unitOfWork.AssignmentRepository.Update(assignment);
                     await unitOfWork.SaveAsync();
-                    string returning = "Kunden blev opdateret korrekt";
+                    string returning = "Opgaven blev opdateret";
                     return Ok(returning);
                 }
                 catch
