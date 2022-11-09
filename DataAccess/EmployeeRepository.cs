@@ -3,7 +3,7 @@ using Entities;
 
 namespace DataAccess
 {
-    public class EmployeeRepository : GenericRepository<EmployeeRepository>
+    public class EmployeeRepository : GenericRepository<Employee>
     {
         public EmployeeRepository(SOSUPowerContext context) : base(context)
         {
