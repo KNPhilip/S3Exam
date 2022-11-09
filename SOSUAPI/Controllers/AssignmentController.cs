@@ -8,18 +8,29 @@ namespace Rest_API.Controllers
     [ApiController]
     public class AssignmentController : ControllerBase
     {
-        #region Fields
         private readonly UnitOfWork unitOfWork;
-        #endregion
 
-        #region Constructors
         public AssignmentController(SOSUPowerContext context)
         {
             this.unitOfWork = new UnitOfWork(context);
         }
-        #endregion
 
-        #region Http Methods
+        [HttpGet]
+        [Route("Assignment")]
+        public async Task<ActionResult<List<Assignment>>> Get()
+        {
+            try
+            {
+                var returning = await unitOfWork.AssignmentRepository.GetAllAsync();
+                return Ok(returning);
+            }
+            catch
+            {
+                string returning = "Der skete en fejl, ordrene kunne ikke hentes, prøv igen";
+                return BadRequest(returning);
+            }
+        }
+
         [HttpPost]
         [Route("Assignment")]
         public async Task<ActionResult<Assignment>> SaveNewCustomer(int assignmentId, string notes, DateTime startDate, DateTime expectedEndDate, DateTime actualEndDate, bool solved, Employee solvedBy, Resident resident)
@@ -78,6 +89,5 @@ namespace Rest_API.Controllers
                 }
             }
         }
-        #endregion
     }
 }
