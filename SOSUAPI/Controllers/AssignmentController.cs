@@ -33,7 +33,7 @@ namespace Rest_API.Controllers
 
         [HttpPost]
         [Route("CreateAssignment")]
-        public async Task<ActionResult<Assignment>> SaveNewAssignment(int assignmentId, string notes, DateTime startDate, DateTime expectedEndDate, DateTime actualEndDate, bool solved, Employee solvedBy, Resident resident)
+        public async Task<ActionResult<Assignment>> SaveNewAssignment(int assignmentId, string notes, DateTime startDate, DateTime expectedEndDate, DateTime actualEndDate, bool solved, int solvedBy, int resident)
         {
             Assignment a = new()
             {
@@ -43,8 +43,8 @@ namespace Rest_API.Controllers
                 ExpectedEndDate = expectedEndDate,
                 ActualEndDate = actualEndDate,
                 Solved = solved,
-                SolvedBy = solvedBy.Id,
-                ResidentId = resident.Id
+                SolvedBy = solvedBy,
+                ResidentId = resident
             };
             try
             {
