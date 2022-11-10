@@ -1,41 +1,84 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SOSUApp.MainPage">
+             x:Class="SOSUApp.MainPage"
+             Title="Beboere"
+             xmlns:viewmodel="clr-namespace:SOSUApp.ViewModels"
+             xmlns:model="clr-namespace:Entities;assembly=Entities"
+             x:DataType="viewmodel:MainPageViewModel"
+             Loaded="ContentPage_Loaded">
 
-    <ScrollView>
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
+    <!-- Grid/Overall layout -->
+    <Grid RowDefinitions="100, Auto, *"
+          ColumnDefinitions=".33*, .33*, .33*"
+          RowSpacing="10"
+          Padding="10">
 
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
+        <Entry Placeholder="Indtast arrangører ID:..."
+                   Text="{Binding Text}"
+                   Grid.Row="1"
+                   Grid.ColumnSpan="2"/>
+        <Button Text="Confirm"
+                Grid.Row="1"
+                Grid.Column="2"/>
 
-            <Label
-                Text="Hello, World!"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
 
-            <Label
-                Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
+        <!-- Binding Events/Layout -->
 
-            <Button
-                x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
+        <ScrollView Padding="10" Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="1" BackgroundColor="Transparent">
+            <StackLayout BindableLayout.ItemsSource="{Binding Residents}"
+                         BackgroundColor="Transparent">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="model:Resident">
 
-        </VerticalStackLayout>
-    </ScrollView>
+
+
+                        <!-- Bindings / Stylings -->
+                        <Border Stroke="gray"
+                            StrokeThickness="2"
+                            StrokeShape="RoundRectangle 10,10,10,40">
+
+                            <StackLayout BackgroundColor="Orange" Padding="10">
+
+                                <Grid ColumnDefinitions="Auto, Auto" ColumnSpacing="5"
+                                  Background="transparent">
+                                    <Label Text="ID:" Grid.Row="1" FontAttributes="Bold"/>
+                                    <Label Text="{Binding Id}" Grid.Column="2"/>
+                                </Grid>
+
+                                <Grid ColumnDefinitions="Auto, Auto" ColumnSpacing="5"
+                                  Background="transparent">
+                                    <Label Text="Title:" FontAttributes="Bold" Grid.Row="1"/>
+                                    <Label Text="{Binding FirstName}" Grid.Column="2"/>
+                                </Grid>
+
+                                <Grid ColumnDefinitions="Auto, Auto" ColumnSpacing="5"
+                                  Background="transparent">
+                                    <Label Text="Description:" FontAttributes="Bold"/>
+                                    <Label Text="{Binding LastName}" Grid.Column="2"/>
+                                </Grid>
+
+                                <Grid ColumnDefinitions="Auto, Auto" ColumnSpacing="5"
+                                  Background="transparent">
+                                    <Label Text="Starts:" FontAttributes="Bold"/>
+                                    <Label Text="{Binding BirthDate}" Grid.Column="2"/>
+                                </Grid>
+
+                                <Grid ColumnDefinitions="Auto, Auto" ColumnSpacing="5"
+                                  Background="transparent">
+                                    <Label Text="Ends:" FontAttributes="Bold"/>
+                                    <Label Text="{Binding DemiseDate}" Grid.Column="2"/>
+                                </Grid>
+                            </StackLayout>
+
+                        </Border>
+
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+        </ScrollView>
+
+
+    </Grid>
 
 </ContentPage>
