@@ -1,4 +1,4 @@
-﻿using Services.Interfaces;
+﻿global using Services.Interfaces;
 using Newtonsoft.Json;
 using System.Text;
 
@@ -6,19 +6,17 @@ namespace Services
 {
     public class SOSUService<TEntity> : ISOSUService<TEntity> where TEntity : class
     {
-        protected static string baseUrl = "https://localhost:7020/api";
+        private const string baseUrl = "https://localhost:7020/api";
 
         public async Task<List<TEntity>> DoHttpGetRequest(string ControllerUrl)
         {
+            using var client = new HttpClient();
             var returnResponse = new List<TEntity>();
-            using (var client = new HttpClient())
-            {
-                string url = $"{baseUrl}/{ControllerUrl}";
-                var apiResponse = await client.GetAsync(url);
+            string url = $"{baseUrl}/{ControllerUrl}";
+            var apiResponse = await client.GetAsync(url);
 
-                returnResponse = JsonConvert.DeserializeObject<List<TEntity>>(await apiResponse.Content.ReadAsStringAsync());
-                return returnResponse;
-            }
+            returnResponse = JsonConvert.DeserializeObject<List<TEntity>>(await apiResponse.Content.ReadAsStringAsync());
+            return returnResponse;
         }
 
         public async Task<string> DoHttpPostRequest(string controllerUrl, TEntity entityToInsert)

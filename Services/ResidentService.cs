@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Services.Interfaces;
-using Entities;
-
-namespace Services
+﻿namespace Services
 {
     public class ResidentService : SOSUService<Resident>, IResidentService<Resident>
     {

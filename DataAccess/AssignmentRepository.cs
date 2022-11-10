@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Entities;
-using Microsoft.Identity.Client;
+﻿using Entities;
 
 namespace DataAccess
 {

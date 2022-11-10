@@ -1,6 +1,6 @@
 ﻿global using Microsoft.AspNetCore.Mvc;
-using DataAccess;
-using Entities;
+global using DataAccess;
+global using Entities;
 
 namespace Rest_API.Controllers
 {

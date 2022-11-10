@@ -1,7 +1,3 @@
-global using Microsoft.AspNetCore.Mvc;
-using DataAccess;
-using Entities;
-
 namespace Rest_API.Controllers
 {
     [Route("api/[controller]")]

@@ -77,8 +77,5 @@
                 </BindableLayout.ItemTemplate>
             </StackLayout>
         </ScrollView>
-
-
     </Grid>
-
 </ContentPage>

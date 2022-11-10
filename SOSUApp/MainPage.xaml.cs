@@ -4,7 +4,7 @@ namespace SOSUApp
 {
     public partial class MainPage : ContentPage
     {
-        private MainPageViewModel viewModel;
+        private readonly MainPageViewModel viewModel;
 
         public MainPage(MainPageViewModel viewModel)
         {

@@ -1,6 +1,5 @@
 ﻿using Entities;
 
-
 namespace DataAccess
 {
     public class UnitOfWork : IDisposable
